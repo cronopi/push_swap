@@ -3,20 +3,13 @@
 void	ft_push_swap(int ac, char **av)
 {
 	int i;
-	int j;
 
 	i = 1;
-	j = 0;
 	while (i < ac)
 	{
-		while(av[i][j] != '\0')
-		{
-			write(1, &av[i][j], 1);
-			j++;
-		}
+		ft_printf("que iso ah:%s\n", av[i]);
+		ft_atoi(av[i]); //agregar los números de tipo int a una variable
 		i++;
-		j = 0;
-		//printf("esto es%i\n", i);
 	}
 }
 
@@ -30,5 +23,8 @@ int	main(int ac, char **av)
 /*
 imprimirlos
 transformarlos a int
+
+funcion que checkee si hay números duplicados.
+funcion que checkee si son o no números (?)
 
 */
