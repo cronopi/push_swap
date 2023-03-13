@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror
 LIBFT= -L libft -lft
 
 NAME = push_swap
-SRC = ft_push_swap.c
+SRC = ft_push_swap.c ft_print_stack.c
 
 OBJ = $(SRC:.c=.o)
 #INCLUDE = push_swap.h
