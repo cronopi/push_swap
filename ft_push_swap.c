@@ -1,15 +1,30 @@
 #include "ft_push_swap.h"
 
+//ft_lstnew(void *content);
 void	ft_push_swap(int ac, char **av)
 {
 	int i;
+	int *nbr;
+	t_list *l_numbers;
+	t_list *new_numbers;
 
 	i = 1;
+	l_numbers = NULL;
 	while (i < ac)
 	{
-		ft_printf("que iso ah:%s\n", av[i]);
-		ft_atoi(av[i]); //agregar los números de tipo int a una variable
+		nbr = malloc(sizeof(int));
+		if (!nbr)
+			return (0);
+		*nbr = ft_atoi(av[i]);
+
+		new_numbers = ft_lstnew(nbr);
+		ft_lstadd_back(&l_numbers, new_numbers);
+		printf("que es estooooo: %i\n", *(int *)l_numbers->content);
 		i++;
+	}
+	while (l_numbers)
+	{
+
 	}
 }
 
