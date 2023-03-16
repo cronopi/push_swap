@@ -19,12 +19,9 @@ static void	fill_string(unsigned long int nbr, char *str, int i)
 	temp = 0;
 	while (i-- > 0)
 	{
-		if (nbr >= 0)
-		{
-			temp = nbr % 10;
-			str[i] = temp + '0';
-			nbr = nbr / 10;
-		}
+		temp = nbr % 10;
+		str[i] = temp + '0';
+		nbr = nbr / 10;
 	}
 }
 

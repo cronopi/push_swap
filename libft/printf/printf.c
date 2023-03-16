@@ -71,14 +71,13 @@ void	ft_index2(char *str, int i, va_list arguments, int *j)
 
 int	ft_index(char *str, int i, va_list arguments, int *j)
 {
-	char			*every_string;
 	void			*every_pointer;
 	char			*tmp_str;
 
 	if (str[i + 1] == 'p')
 	{
 		every_pointer = va_arg(arguments, void *);
-		tmp_str = ft_hex_print_void(every_pointer, 1);
+		tmp_str = ft_hex_print_void(every_pointer);
 		if (every_pointer != 0)
 			(*j) = (*j) + ft_strlen(tmp_str) + 2;
 		else

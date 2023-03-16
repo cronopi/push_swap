@@ -8,7 +8,7 @@
 # include "libft/libft.h"
 
 
-void ft_print_stack(t_list *l_numbers, t_list *lb_numbers, char stack);
+void	ft_print_stack(t_list **l_numbers, t_list **lb_numbers, char stack);
 void	ft_push_swap(int ac, char **av);
 int		ft_atoi(const char *str);
 

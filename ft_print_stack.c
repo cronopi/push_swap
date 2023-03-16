@@ -2,9 +2,6 @@
 
 void	ft_putlst(t_list *lst)
 {
-	int	i;
-
-	i = 0;
 	while (lst != NULL)
 	{
 		ft_printf("imprime la lista: %i\n", *(int *)lst->content);
@@ -12,15 +9,15 @@ void	ft_putlst(t_list *lst)
 	}
 }
 
-void ft_print_stack(t_list *l_numbers, t_list *lb_numbers, char stack)
+void ft_print_stack(t_list **l_numbers, t_list **lb_numbers, char stack)
 {
 	if (stack == 'a')
-		ft_putlst(l_numbers);
+		ft_putlst(*l_numbers);
 	else if (stack == 'b')
-		ft_putlst(lb_numbers);
+		ft_putlst(*lb_numbers);
 	else
 	{
-		ft_putlst(l_numbers);
-		ft_putlst(lb_numbers);
+		ft_putlst(*l_numbers);
+		ft_putlst(*lb_numbers);
 	}
 }

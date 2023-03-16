@@ -39,12 +39,9 @@ char	*ft_ptrtohex(unsigned long int number)
 	str[i] = '\0';
 	while (i-- > 0)
 	{
-		if (nbr >= 0)
-		{
-			temp = nbr % 16;
-			convert(temp, str, i);
-			nbr = nbr / 16;
-		}
+		temp = nbr % 16;
+		convert(temp, str, i);
+		nbr = nbr / 16;
 	}
 	return (str);
 }

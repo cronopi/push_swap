@@ -17,6 +17,9 @@ printf/ft_hex_print_void.c printf/ft_ptrtohex.c printf/ft_strlen.c printf/ft_ito
 OBJ = $(SRC:.c=.o)
 INCLUDE = libft.h
 
+%.o: %.c
+	$(CC) $(FLAGS) -c -o $@ $<
+
 all: $(NAME)
 
 $(NAME): $(OBJ) $(INCLUDE)

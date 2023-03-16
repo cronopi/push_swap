@@ -18,15 +18,12 @@ void	ft_convert(int i, unsigned int nbr, char **str)
 
 	while (i-- > 0)
 	{
-		if (nbr >= 0)
-		{
-			temp = nbr % 16;
-			if (temp >= 10 && temp <= 16)
-				(*str)[i] = temp + 87;
-			else
-				(*str)[i] = temp + '0';
-			nbr = nbr / 16;
-		}
+		temp = nbr % 16;
+		if (temp >= 10 && temp <= 16)
+			(*str)[i] = temp + 87;
+		else
+			(*str)[i] = temp + '0';
+		nbr = nbr / 16;
 	}
 }
 

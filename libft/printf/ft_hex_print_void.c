@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 #include <stdint.h>
 
-char	*ft_hex_print_void(void *ptr, int upper_lower)
+char	*ft_hex_print_void(void *ptr)
 {
 	char	*str;
 

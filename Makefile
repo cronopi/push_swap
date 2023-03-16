@@ -11,11 +11,14 @@ SRC = ft_push_swap.c ft_print_stack.c
 OBJ = $(SRC:.c=.o)
 #INCLUDE = push_swap.h
 
+#%.o: %.c
+#	$(CC) $(FLAGS) -c -o $@ $<
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(OBJ) $(FLAGS) $(LIBFT) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ) $(BONUSOBJ)
