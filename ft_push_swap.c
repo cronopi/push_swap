@@ -6,13 +6,6 @@
 */
 
 /*
-void	ft_rotate_ab(t_list l_numbers, t_list lb_numbers)
-{
-	ft_lstadd_back(&l_numbers, l_numbers);
-	l_numbers->next = NULL;
-	ft_lstadd_back(&lb_numbers, lb_numbers);
-	lb_numbers->next = NULL;
-}
 
 void	reverse_rotate_a(t_list l_numbers)
 {
@@ -41,6 +34,14 @@ void ft_swap_a(t_list **l_numbers)
 	printf("imprime el swap de a: %i\n", *(int *)(*l_numbers)->content); */ //esto genera leaks
 }
 
+void ft_swap_b(t_list **lb_numbers)
+{
+	if (ft_lstsize(*lb_numbers) <= 1)
+		return ;
+
+	swap_stack((*lb_numbers), (*lb_numbers)->next);
+}
+
 void ft_push_b(t_list **l_numbers, t_list **lb_numbers)
 {
 	t_list	*back_up;
@@ -51,7 +52,7 @@ void ft_push_b(t_list **l_numbers, t_list **lb_numbers)
 	new_numbers = ft_lstnew(duplicate);
 
 	ft_lstadd_back(lb_numbers, new_numbers);
-	back_up = (*l_numbers)->next;			// aqui hay leaks por 16 bytes
+	back_up = (*l_numbers)->next;
 	free(*l_numbers);
 	(*l_numbers)->next = NULL;
 	(*l_numbers) = back_up;
@@ -68,10 +69,111 @@ void ft_push_b(t_list **l_numbers, t_list **lb_numbers)
 
 void ft_rotate_a(t_list **l_numbers)
 {
-	ft_printf("imprime la lista: %i\n", *((int *)(*l_numbers)->content));
-	ft_lstadd_front(l_numbers, *l_numbers);
-	ft_printf("imprime la lista despues : %i\n", *((int *)(*l_numbers)->content));
-	//(*l_numbers)->next = NULL;
+	t_list *tmp;
+	t_list *last;
+
+	if (ft_lstsize(*l_numbers) <= 1)
+		return ;
+
+	tmp = *l_numbers;
+	*l_numbers = (*l_numbers)->next;
+	//printf("imprime la posicion: %i\n", *(int *)(*l_numbers)->content);
+	last = ft_lstlast(*l_numbers);
+	last->next = tmp;
+	tmp->next = NULL;
+
+
+	/*
+	(*l_numbers) = last;
+	(*l_numbers)->next = tmp;
+	(*l_numbers) = tmp;
+	tmp->next = NULL;
+	*/
+}
+
+void ft_rotate_b(t_list **lb_numbers)
+{
+	t_list *tmp;
+	t_list *last;
+
+	if (ft_lstsize(*lb_numbers) <= 1)
+		return ;
+
+	tmp = *lb_numbers;
+	*lb_numbers = (*lb_numbers)->next;
+	last = ft_lstlast(*lb_numbers);
+	last->next = tmp;
+	tmp->next = NULL;
+}
+
+void ft_rotate_both(t_list **l_numbers, t_list **lb_numbers)
+{
+	ft_rotate_a(l_numbers);
+	ft_rotate_b(lb_numbers);
+}
+
+void ft_reverse_rotate_a(t_list **l_numbers)
+{
+	t_list *last;
+	t_list *first;
+	t_list *tmp;
+
+	if (ft_lstsize(*l_numbers) <= 1)
+		return ;
+
+	last = ft_lstlast(*l_numbers);
+	ft_lstadd_front(l_numbers, last);
+	tmp = *l_numbers;
+	ft_printf("imprime : %i\n", *(int *)tmp->content);
+	ft_printf("imprime : %i\n", *(int *)(*l_numbers)->content);
+
+/* 	while ((*l_numbers)->next != last)
+	{
+		(*l_numbers) = (*l_numbers)->next;
+	}
+	(*l_numbers)->next = NULL; */
+
+	while (tmp->next != last)
+	{
+		tmp = tmp->next;
+	}
+	tmp->next = NULL;
+	ft_printf("imprime a ver : %i\n", *(int *)(*l_numbers)->content);
+}
+
+void ft_reverse_rotate_b(t_list **lb_numbers)
+{
+	t_list *last;
+	t_list *first;
+	t_list *tmp;
+
+	if (ft_lstsize(*lb_numbers) <= 1)
+		return ;
+
+	last = ft_lstlast(*lb_numbers);
+	ft_lstadd_front(lb_numbers, last);
+	tmp = *lb_numbers;
+	ft_printf("imprime : %i\n", *(int *)tmp->content);
+	ft_printf("imprime : %i\n", *(int *)(*lb_numbers)->content);
+
+/* 	while ((*l_numbers)->next != last)
+	{
+		(*l_numbers) = (*l_numbers)->next;
+	}
+	(*l_numbers)->next = NULL; */
+
+	while (tmp->next != last)
+	{
+		tmp = tmp->next;
+	}
+	tmp->next = NULL;
+	ft_printf("imprime a ver : %i\n", *(int *)(*lb_numbers)->content);
+}
+
+void	ft_reverse_rotate_both(t_list **l_numbers, t_list **lb_numbers)
+{
+	ft_reverse_rotate_a(l_numbers);
+	ft_reverse_rotate_b(lb_numbers);
 }
 
 void	ft_push_swap(int ac, char **av)
@@ -97,9 +199,11 @@ void	ft_push_swap(int ac, char **av)
 		ft_lstadd_back(&l_numbers, new_numbers);
 		i++;
 	}
-	ft_push_b(&l_numbers, &lb_numbers);
 	//ft_swap_a(&l_numbers);
+	//ft_swap_b(t_list **lb_numbers)
+	//ft_push_b(&l_numbers, &lb_numbers);
 	//ft_rotate_a(&l_numbers);
+	ft_reverse_rotate_a(&l_numbers);
 
 
 	printf("este es despues de la llamada a la funcion\n");
