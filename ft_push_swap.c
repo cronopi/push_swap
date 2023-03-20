@@ -6,12 +6,11 @@
 */
 
 /*
+	funcion que detecte el número del stack más pequeño.
+	codigo que sepa cuando es mejor hacer rotate y cuando es mejor hacer reverse rotate
+/*/
 
-void	reverse_rotate_a(t_list l_numbers)
-{
-	l_numbers = ft_last(l_numbers);
-	ft_lstadd_front(&l_numbers, l_numbers);
-} */
+/*ft_sort_stack();*/
 
 void	swap_stack(t_list *a, t_list *b)
 {
@@ -77,18 +76,9 @@ void ft_rotate_a(t_list **l_numbers)
 
 	tmp = *l_numbers;
 	*l_numbers = (*l_numbers)->next;
-	//printf("imprime la posicion: %i\n", *(int *)(*l_numbers)->content);
 	last = ft_lstlast(*l_numbers);
 	last->next = tmp;
 	tmp->next = NULL;
-
-
-	/*
-	(*l_numbers) = last;
-	(*l_numbers)->next = tmp;
-	(*l_numbers) = tmp;
-	tmp->next = NULL;
-	*/
 }
 
 void ft_rotate_b(t_list **lb_numbers)
@@ -199,17 +189,19 @@ void	ft_push_swap(int ac, char **av)
 		ft_lstadd_back(&l_numbers, new_numbers);
 		i++;
 	}
+	//ft_check_for_duplicates(l_numbers);
+
 	//ft_swap_a(&l_numbers);
 	//ft_swap_b(t_list **lb_numbers)
 	//ft_push_b(&l_numbers, &lb_numbers);
 	//ft_rotate_a(&l_numbers);
-	ft_reverse_rotate_a(&l_numbers);
+	//ft_reverse_rotate_a(&l_numbers);
+	//ft_sort_stack();
 
-
-	printf("este es despues de la llamada a la funcion\n");
+	printf("este es el stack B despues de la llamada a la funcion\n");
 	ft_print_stack(&l_numbers, &lb_numbers, 'b');
 
-	printf("este es despues de la llamada a la funcion\n");
+	printf("este es el stack A despues de la llamada a la funcion\n");
 	ft_print_stack(&l_numbers, &lb_numbers, 'a');
 
 	ft_lstclear(&l_numbers, &free);
