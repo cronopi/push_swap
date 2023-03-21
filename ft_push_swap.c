@@ -1,11 +1,6 @@
 #include "ft_push_swap.h"
 
 /*
-	check_dup(); funcion que checkee si hay números duplicados.
-	check_b_empty(); funcion que checkee si son o no números (?)
-*/
-
-/*
 	funcion que detecte el número del stack más pequeño.
 	codigo que sepa cuando es mejor hacer rotate y cuando es mejor hacer reverse rotate
 /*/
@@ -27,10 +22,6 @@ void ft_swap_a(t_list **l_numbers)
 		return ;
 
 	swap_stack((*l_numbers), (*l_numbers)->next);
-
-/* 	printf("imprime el swap de a: %i\n", *(int *)(*l_numbers)->content);
-	(*l_numbers) = (*l_numbers)->next;
-	printf("imprime el swap de a: %i\n", *(int *)(*l_numbers)->content); */ //esto genera leaks
 }
 
 void ft_swap_b(t_list **lb_numbers)
@@ -61,9 +52,6 @@ void ft_push_b(t_list **l_numbers, t_list **lb_numbers)
 	ft_print_stack(l_numbers, lb_numbers, 'a');
 	printf("imprimes b\n");
 	ft_print_stack(l_numbers, lb_numbers, 'b');
-
-	//ft_lstdelone(new_numbers, &free);
-	//ft_lstdelone(new_numbers, &free);
 }
 
 void ft_rotate_a(t_list **l_numbers)
@@ -117,12 +105,6 @@ void ft_reverse_rotate_a(t_list **l_numbers)
 	ft_printf("imprime : %i\n", *(int *)tmp->content);
 	ft_printf("imprime : %i\n", *(int *)(*l_numbers)->content);
 
-/* 	while ((*l_numbers)->next != last)
-	{
-		(*l_numbers) = (*l_numbers)->next;
-	}
-	(*l_numbers)->next = NULL; */
-
 	while (tmp->next != last)
 	{
 		tmp = tmp->next;
@@ -146,12 +128,6 @@ void ft_reverse_rotate_b(t_list **lb_numbers)
 	ft_printf("imprime : %i\n", *(int *)tmp->content);
 	ft_printf("imprime : %i\n", *(int *)(*lb_numbers)->content);
 
-/* 	while ((*l_numbers)->next != last)
-	{
-		(*l_numbers) = (*l_numbers)->next;
-	}
-	(*l_numbers)->next = NULL; */
-
 	while (tmp->next != last)
 	{
 		tmp = tmp->next;
@@ -166,6 +142,75 @@ void	ft_reverse_rotate_both(t_list **l_numbers, t_list **lb_numbers)
 	ft_reverse_rotate_b(lb_numbers);
 }
 
+int ft_check_for_duplicates(t_list **l_numbers)
+{
+	t_list *tmp;
+
+	tmp = (*l_numbers)->next;
+	while ((*l_numbers)->next != NULL)
+	{
+		while(tmp != NULL)
+		{
+			if (*(int *)(*l_numbers)->content == *(int *)tmp->content)
+			{
+				ft_printf("error\n");
+				return (0);
+			}
+			ft_printf("imprime el numero bellaco: %i, comparare %i\n", *(int *)(*l_numbers)->content, *(int *)tmp->content);
+			tmp = tmp->next;
+		}
+		(*l_numbers) = (*l_numbers)->next;
+		tmp = (*l_numbers)->next;
+	}
+	return (1);
+}
+
+int	ft_check_numbers(char **av, int ac)
+{
+	int i;
+	int j;
+	
+	i = 0;
+	j = 1;
+	while (j < ac)
+	{
+		while(av[j][i] != '0')
+		{
+			if (av[j][i] == 'a')
+				return (0);
+			if (av[j][i] < '0' && av[j][i] > '9')
+				return (0);
+			i++;
+		}
+		j++;
+		i = 0;
+	}
+	return (1);
+}
+
+int ft_return_lowerst_number(t_list **l_numbers)
+{
+	t_list *tmp;
+
+	tmp = (*l_numbers)->next;
+	while ((*l_numbers)->next != NULL)
+	{
+		while(tmp != NULL)
+		{
+			if (*(int *)(*l_numbers)->content == *(int *)tmp->content)
+			{
+				ft_printf("error\n");
+				return (0);
+			}
+			ft_printf("imprime el numero bellaco: %i, comparare %i\n", *(int *)(*l_numbers)->content, *(int *)tmp->content);
+			tmp = tmp->next;
+		}
+		(*l_numbers) = (*l_numbers)->next;
+		tmp = (*l_numbers)->next;
+	}
+	return (1);
+}
+
 void	ft_push_swap(int ac, char **av)
 {
 	int i;
@@ -178,6 +223,8 @@ void	ft_push_swap(int ac, char **av)
 	i = 1;
 	l_numbers = NULL;
 	lb_numbers = NULL;
+	if (ft_check_numbers(av, ac) == 0)
+		return ;
 	while (i < ac)
 	{
 		nbr = malloc(sizeof(int));
@@ -189,8 +236,8 @@ void	ft_push_swap(int ac, char **av)
 		ft_lstadd_back(&l_numbers, new_numbers);
 		i++;
 	}
-	//ft_check_for_duplicates(l_numbers);
-
+	if (ft_check_for_duplicates(&l_numbers) == 0)
+		return ;
 	//ft_swap_a(&l_numbers);
 	//ft_swap_b(t_list **lb_numbers)
 	//ft_push_b(&l_numbers, &lb_numbers);
@@ -210,7 +257,6 @@ void	ft_push_swap(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-
 	ft_push_swap(ac ,av);
 	return (0);
 }
