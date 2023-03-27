@@ -169,10 +169,13 @@ int	ft_check_numbers(char **av, int ac)
 
 	i = 0;
 	j = 1;
+//	printf("check\n");
 	while (j < ac)
 	{
-		while(av[j][i] != '0')
+//	printf("loop argumentos %i\n", j);
+		while(av[j][i] && av[j][i] != '0')
 		{
+//	printf("loop letras %i\n", i);
 			if (av[j][i] == 'a')
 				return (0);
 			if (av[j][i] < '0' && av[j][i] > '9')
@@ -182,6 +185,7 @@ int	ft_check_numbers(char **av, int ac)
 		j++;
 		i = 0;
 	}
+	//printf("checkend\n");
 	return (1);
 }
 
@@ -228,7 +232,7 @@ void	ft_sort_stack(t_list **l_numbers)
 {
 	t_list *h_tmp;
 	t_list *l_tmp;
-	
+
 	h_tmp = ft_return_highest_number(l_numbers);
 	l_tmp = ft_return_lowerst_number(l_numbers);
 	while (ft_lstsize(*l_numbers) > 3)
@@ -268,8 +272,11 @@ void	ft_push_swap(int ac, char **av)
 	i = 1;
 	l_numbers = NULL;
 	lb_numbers = NULL;
+	printf("start\n");
 	if (ft_check_numbers(av, ac) == 0)
 		return ;
+	printf("post check numebrs\n");
+
 	while (i < ac)
 	{
 		nbr = malloc(sizeof(int));
@@ -295,7 +302,7 @@ void	ft_push_swap(int ac, char **av)
 	ft_print_stack(&l_numbers, &lb_numbers, 'b');
 
 	printf("este es el stack A despues de la llamada a la funcion\n");
-	//ft_print_stack(&l_numbers, &lb_numbers, 'a');
+	ft_print_stack(&l_numbers, &lb_numbers, 'a');
 
 	ft_lstclear(&l_numbers, &free);
 	ft_lstclear(&lb_numbers, &free);
