@@ -1,6 +1,8 @@
 #include "ft_push_swap.h"
 
-/*ft_sort_stack();*/
+/*ft_sort_stack();
+" 3 9 6 7 78" tiene que coger los números por separado.
+*/
 
 void	swap_stack(t_list *a, t_list *b)
 {
@@ -137,25 +139,25 @@ void	ft_reverse_rotate_both(t_list **l_numbers, t_list **lb_numbers)
 	ft_reverse_rotate_b(lb_numbers);
 }
 
-int ft_check_for_duplicates(t_list **l_numbers)
+int ft_check_for_duplicates(t_list *l_numbers)
 {
 	t_list *tmp;
 
-	tmp = (*l_numbers)->next;
-	while ((*l_numbers)->next != NULL)
+	tmp = l_numbers->next;
+	while (l_numbers->next != NULL)
 	{
 		while(tmp != NULL)
 		{
-			if (*(int *)(*l_numbers)->content == *(int *)tmp->content)
+			if (*(int *)l_numbers->content == *(int *)tmp->content)
 			{
 				ft_printf("error\n");
 				return (0);
 			}
-			ft_printf("imprime el numero bellaco: %i, comparare %i\n", *(int *)(*l_numbers)->content, *(int *)tmp->content);
+			ft_printf("imprime el numero bellaco: %i, comparare %i\n", *(int *)l_numbers->content, *(int *)tmp->content);
 			tmp = tmp->next;
 		}
-		(*l_numbers) = (*l_numbers)->next;
-		tmp = (*l_numbers)->next;
+		l_numbers = l_numbers->next;
+		tmp = l_numbers->next;
 	}
 	return (1);
 }
@@ -211,43 +213,46 @@ t_list *ft_return_highest_number(t_list **l_numbers)
 	return (highest_nbr);
 }
 
-t_list ft_stack_size_plus3(t_list **l_numbers)
+void ft_stack_size_plus3(t_list **l_numbers)
 {
+
 	/*
 	tengo que encotrar el numero más pequeño del stack a y moverlo a la primera posicion del stack a para pushearlo al stack b
 	*/
-	ft_return_lowerst_number(&l_numbers);
+	(*l_numbers) =  ft_return_lowerst_number(l_numbers);
+	ft_printf("imprime la lista: %i\n", *(int *)(*l_numbers)->content);
+	ft_return_lowerst_number(l_numbers);
 }
 
 void	ft_sort_stack(t_list **l_numbers)
 {
 	t_list *h_tmp;
 	t_list *l_tmp;
-
-	h_tmp = ft_return_highest_number(*l_numbers);
-	l_tmp = ft_return_lowerst_number(*l_numbers);
+	
+	h_tmp = ft_return_highest_number(l_numbers);
+	l_tmp = ft_return_lowerst_number(l_numbers);
 	while (ft_lstsize(*l_numbers) > 3)
 	{
-		ft_stack_size_plus3(*l_numbers);
+		ft_stack_size_plus3(l_numbers);
 	}
 	if (ft_lstsize(*l_numbers) == 3)
 	{
 		if ((*l_numbers)->content == l_tmp->content && (*l_numbers)->next->next->content == h_tmp)
-			ft_swap_a(&l_numbers);
+			ft_swap_a(l_numbers);
 		if ((*l_numbers)->content == l_tmp->content && (*l_numbers)->next->next->content == h_tmp)
 		{
-			ft_swap_a(&l_numbers);
-			ft_reverse_rotate_a(&l_numbers);
+			ft_swap_a(l_numbers);
+			ft_reverse_rotate_a(l_numbers);
 		}
 		if ((*l_numbers)->content == h_tmp->content && (*l_numbers)->next->content == l_tmp)
-			ft_rotate_a(&l_numbers);
+			ft_rotate_a(l_numbers);
 		if ((*l_numbers)->content == l_tmp->content && (*l_numbers)->next->content == h_tmp)
 		{
-			ft_swap_a(&l_numbers);
-			ft_rotate_a(&l_numbers);
+			ft_swap_a(l_numbers);
+			ft_rotate_a(l_numbers);
 		}
 		if ((*l_numbers)->next->content == h_tmp->content && (*l_numbers)->next->next->content == l_tmp)
-			ft_reverse_rotate_a(&l_numbers);
+			ft_reverse_rotate_a(l_numbers);
 	}
 }
 
@@ -276,7 +281,7 @@ void	ft_push_swap(int ac, char **av)
 		ft_lstadd_back(&l_numbers, new_numbers);
 		i++;
 	}
-	if (ft_check_for_duplicates(&l_numbers) == 0)
+	if (ft_check_for_duplicates(l_numbers) == 0)
 		return ;
 	//ft_swap_a(&l_numbers);
 	//ft_swap_b(t_list **lb_numbers)
@@ -290,7 +295,7 @@ void	ft_push_swap(int ac, char **av)
 	ft_print_stack(&l_numbers, &lb_numbers, 'b');
 
 	printf("este es el stack A despues de la llamada a la funcion\n");
-	ft_print_stack(&l_numbers, &lb_numbers, 'a');
+	//ft_print_stack(&l_numbers, &lb_numbers, 'a');
 
 	ft_lstclear(&l_numbers, &free);
 	ft_lstclear(&lb_numbers, &free);
