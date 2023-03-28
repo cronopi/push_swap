@@ -1,7 +1,7 @@
 #include "ft_push_swap.h"
 
 /*ft_sort_stack();
-" 3 9 6 7 78" tiene que coger los números por separado.
+	// " 3 9 6 7 78" tiene que coger los números por separado.
 */
 
 void	swap_stack(t_list *a, t_list *b)
@@ -169,13 +169,10 @@ int	ft_check_numbers(char **av, int ac)
 
 	i = 0;
 	j = 1;
-//	printf("check\n");
 	while (j < ac)
 	{
-//	printf("loop argumentos %i\n", j);
-		while(av[j][i] && av[j][i] != '0')
+		while(av[j][i])
 		{
-//	printf("loop letras %i\n", i);
 			if (av[j][i] == 'a')
 				return (0);
 			if (av[j][i] < '0' && av[j][i] > '9')
@@ -185,34 +182,33 @@ int	ft_check_numbers(char **av, int ac)
 		j++;
 		i = 0;
 	}
-	//printf("checkend\n");
 	return (1);
 }
 
-t_list *ft_return_lowerst_number(t_list **l_numbers)
+t_list *ft_return_lowerst_number(t_list *l_numbers)
 {
 	t_list *low_nbr;
 
-	low_nbr = *l_numbers;
-	while (*l_numbers != NULL)
+	low_nbr = l_numbers;
+	while (l_numbers != NULL)
 	{
-		if (low_nbr->content > (*l_numbers)->content)
-			low_nbr = *l_numbers;
-		*l_numbers = (*l_numbers)->next;
+		if (*(int *)low_nbr->content > *(int *)l_numbers->content)
+			low_nbr = l_numbers;
+		l_numbers = (l_numbers)->next;
 	}
 	return (low_nbr);
 }
 
-t_list *ft_return_highest_number(t_list **l_numbers)
+t_list *ft_return_highest_number(t_list *l_numbers)
 {
 	t_list *highest_nbr;
 
-	highest_nbr = *l_numbers;
-	while (*l_numbers != NULL)
+	highest_nbr = l_numbers;
+	while (l_numbers != NULL)
 	{
-		if (highest_nbr->content > (*l_numbers)->content)
-			highest_nbr = *l_numbers;
-		*l_numbers = (*l_numbers)->next;
+		if (*(int *)highest_nbr->content < *(int *)(l_numbers)->content)
+			highest_nbr = l_numbers;
+		l_numbers = (l_numbers)->next;
 	}
 	return (highest_nbr);
 }
@@ -223,9 +219,9 @@ void ft_stack_size_plus3(t_list **l_numbers)
 	/*
 	tengo que encotrar el numero más pequeño del stack a y moverlo a la primera posicion del stack a para pushearlo al stack b
 	*/
-	(*l_numbers) =  ft_return_lowerst_number(l_numbers);
+	(*l_numbers) =  ft_return_lowerst_number(*l_numbers);
 	ft_printf("imprime la lista: %i\n", *(int *)(*l_numbers)->content);
-	ft_return_lowerst_number(l_numbers);
+	//ft_return_lowerst_number(*l_numbers);
 }
 
 void	ft_sort_stack(t_list **l_numbers)
@@ -233,30 +229,43 @@ void	ft_sort_stack(t_list **l_numbers)
 	t_list *h_tmp;
 	t_list *l_tmp;
 
-	h_tmp = ft_return_highest_number(l_numbers);
-	l_tmp = ft_return_lowerst_number(l_numbers);
-	while (ft_lstsize(*l_numbers) > 3)
+
+	l_tmp = ft_return_lowerst_number(*l_numbers);
+	h_tmp = ft_return_highest_number(*l_numbers);
+/* 	while (ft_lstsize(*l_numbers) > 3)
 	{
+		printf("entra aqui mayor que 3\n");
 		ft_stack_size_plus3(l_numbers);
-	}
+	} */
 	if (ft_lstsize(*l_numbers) == 3)
 	{
-		if ((*l_numbers)->content == l_tmp->content && (*l_numbers)->next->next->content == h_tmp)
+		if ((*l_numbers)->next->content == l_tmp->content && (*l_numbers)->next->next->content == h_tmp->content)
+		{
 			ft_swap_a(l_numbers);
-		if ((*l_numbers)->content == l_tmp->content && (*l_numbers)->next->next->content == h_tmp)
+			printf("entra aqui1\n");
+		}
+		else if ((*l_numbers)->content == h_tmp->content && (*l_numbers)->next->next->content == l_tmp->content)
 		{
 			ft_swap_a(l_numbers);
 			ft_reverse_rotate_a(l_numbers);
+			printf("entra aqui2\n");
 		}
-		if ((*l_numbers)->content == h_tmp->content && (*l_numbers)->next->content == l_tmp)
-			ft_rotate_a(l_numbers);
-		if ((*l_numbers)->content == l_tmp->content && (*l_numbers)->next->content == h_tmp)
+		else if ((*l_numbers)->content == h_tmp->content && (*l_numbers)->next->content == l_tmp->content)
 		{
+			printf("entra aqui3\n");
+			ft_rotate_a(l_numbers);
+		}
+		else if ((*l_numbers)->content == l_tmp->content && (*l_numbers)->next->content == h_tmp->content)
+		{
+			printf("entra aqui4\n");
 			ft_swap_a(l_numbers);
 			ft_rotate_a(l_numbers);
 		}
-		if ((*l_numbers)->next->content == h_tmp->content && (*l_numbers)->next->next->content == l_tmp)
+		else if ((*l_numbers)->next->content == h_tmp->content && (*l_numbers)->next->next->content == l_tmp->content)
+		{
+			printf("entra aqui5\n");
 			ft_reverse_rotate_a(l_numbers);
+		}
 	}
 }
 
@@ -272,10 +281,8 @@ void	ft_push_swap(int ac, char **av)
 	i = 1;
 	l_numbers = NULL;
 	lb_numbers = NULL;
-	printf("start\n");
 	if (ft_check_numbers(av, ac) == 0)
 		return ;
-	printf("post check numebrs\n");
 
 	while (i < ac)
 	{
