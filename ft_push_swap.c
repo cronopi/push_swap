@@ -215,13 +215,45 @@ t_list *ft_return_highest_number(t_list *l_numbers)
 
 void ft_stack_size_plus3(t_list **l_numbers)
 {
+	int i;
+	int lst_size;
+	t_list *tmp;
 
+	i = 0;
+	tmp = (*l_numbers);
 	/*
-	tengo que encotrar el numero más pequeño del stack a y moverlo a la primera posicion del stack a para pushearlo al stack b
+		si la posicion de número en la lista es inferior a la mitad reverse_rotate_a
+		si la posicion de número en la lista es superior a la mitad rotate_a
 	*/
 	(*l_numbers) =  ft_return_lowerst_number(*l_numbers);
-	ft_printf("imprime la lista: %i\n", *(int *)(*l_numbers)->content);
-	//ft_return_lowerst_number(*l_numbers);
+	while (tmp != (*l_numbers)) // checkear la posicion del numero en la lista.
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	printf("que iso aaaa%i\n", i);
+
+
+	lst_size = ft_lstsize(*l_numbers); // calcular el tamaño de la lista.
+	printf("%i\n", lst_size);
+
+	ft_printf("imprime la listatesting: %i\n", *(int *)(*l_numbers)->content);
+	if (i > (lst_size / 2)) // si es inferior a la mitad de la lista vas a hacer reverse rotate
+		while(i <= lst_size)
+		{
+			ft_reverse_rotate_a(l_numbers);
+			i++;
+		}
+	else
+		while(i) // si es superior a la mitad de la lista vas a hacer reverse rotate
+		{
+			ft_reverse_rotate_a(l_numbers);
+			i--;
+		}
+
+	printf("que iso rthwbjriojvñaejñavj%i %i\n", i, j);
+	/*aquí tendría que ir la funcion de pushear al stack b el número, dando por hecho que ya está en la primera posición*/
+	ft_push_b(l_numbers, lb_numbers);
 }
 
 void	ft_sort_stack(t_list **l_numbers)
@@ -232,38 +264,32 @@ void	ft_sort_stack(t_list **l_numbers)
 
 	l_tmp = ft_return_lowerst_number(*l_numbers);
 	h_tmp = ft_return_highest_number(*l_numbers);
-/* 	while (ft_lstsize(*l_numbers) > 3)
+	while (ft_lstsize(*l_numbers) > 3)
 	{
-		printf("entra aqui mayor que 3\n");
 		ft_stack_size_plus3(l_numbers);
-	} */
-	if (ft_lstsize(*l_numbers) == 3)
+	}
+	if (ft_lstsize(*l_numbers) == 3) //mientras el stack a sea menor o igual que 10
 	{
 		if ((*l_numbers)->next->content == l_tmp->content && (*l_numbers)->next->next->content == h_tmp->content)
 		{
 			ft_swap_a(l_numbers);
-			printf("entra aqui1\n");
 		}
 		else if ((*l_numbers)->content == h_tmp->content && (*l_numbers)->next->next->content == l_tmp->content)
 		{
 			ft_swap_a(l_numbers);
 			ft_reverse_rotate_a(l_numbers);
-			printf("entra aqui2\n");
 		}
 		else if ((*l_numbers)->content == h_tmp->content && (*l_numbers)->next->content == l_tmp->content)
 		{
-			printf("entra aqui3\n");
 			ft_rotate_a(l_numbers);
 		}
 		else if ((*l_numbers)->content == l_tmp->content && (*l_numbers)->next->content == h_tmp->content)
 		{
-			printf("entra aqui4\n");
 			ft_swap_a(l_numbers);
 			ft_rotate_a(l_numbers);
 		}
 		else if ((*l_numbers)->next->content == h_tmp->content && (*l_numbers)->next->next->content == l_tmp->content)
 		{
-			printf("entra aqui5\n");
 			ft_reverse_rotate_a(l_numbers);
 		}
 	}
