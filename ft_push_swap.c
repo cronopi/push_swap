@@ -44,11 +44,11 @@ void ft_push_b(t_list **l_numbers, t_list **lb_numbers)
 	(*l_numbers)->next = NULL;
 	(*l_numbers) = back_up;
 
-	printf("este es durante el push_b\n");
-	printf("imprimes a\n");
-	ft_print_stack(l_numbers, lb_numbers, 'a');
-	printf("imprimes b\n");
-	ft_print_stack(l_numbers, lb_numbers, 'b');
+	//printf("este es durante el push_b\n");
+	//printf("imprimes a\n");
+	//ft_print_stack(l_numbers, lb_numbers, 'a');
+	//printf("imprimes b\n");
+	//ft_print_stack(l_numbers, lb_numbers, 'b');
 }
 
 void ft_rotate_a(t_list **l_numbers)
@@ -99,15 +99,15 @@ void ft_reverse_rotate_a(t_list **l_numbers)
 	last = ft_lstlast(*l_numbers);
 	ft_lstadd_front(l_numbers, last);
 	tmp = *l_numbers;
-	ft_printf("imprime : %i\n", *(int *)tmp->content);
-	ft_printf("imprime : %i\n", *(int *)(*l_numbers)->content);
+	//ft_printf("imprime : %i\n", *(int *)tmp->content);
+	//ft_printf("imprime : %i\n", *(int *)(*l_numbers)->content);
 
 	while (tmp->next != last)
 	{
 		tmp = tmp->next;
 	}
 	tmp->next = NULL;
-	ft_printf("imprime a ver : %i\n", *(int *)(*l_numbers)->content);
+	//ft_printf("imprime a ver : %i\n", *(int *)(*l_numbers)->content);
 }
 
 void ft_reverse_rotate_b(t_list **lb_numbers)
@@ -122,15 +122,15 @@ void ft_reverse_rotate_b(t_list **lb_numbers)
 	last = ft_lstlast(*lb_numbers);
 	ft_lstadd_front(lb_numbers, last);
 	tmp = *lb_numbers;
-	ft_printf("imprime : %i\n", *(int *)tmp->content);
-	ft_printf("imprime : %i\n", *(int *)(*lb_numbers)->content);
+	//ft_printf("imprime : %i\n", *(int *)tmp->content);
+	//ft_printf("imprime : %i\n", *(int *)(*lb_numbers)->content);
 
 	while (tmp->next != last)
 	{
 		tmp = tmp->next;
 	}
 	tmp->next = NULL;
-	ft_printf("imprime a ver : %i\n", *(int *)(*lb_numbers)->content);
+	//ft_printf("imprime a ver : %i\n", *(int *)(*lb_numbers)->content);
 }
 
 void	ft_reverse_rotate_both(t_list **l_numbers, t_list **lb_numbers)
@@ -153,7 +153,6 @@ int ft_check_for_duplicates(t_list *l_numbers)
 				ft_printf("error\n");
 				return (0);
 			}
-			ft_printf("imprime el numero bellaco: %i, comparare %i\n", *(int *)l_numbers->content, *(int *)tmp->content);
 			tmp = tmp->next;
 		}
 		l_numbers = l_numbers->next;
@@ -213,11 +212,13 @@ t_list *ft_return_highest_number(t_list *l_numbers)
 	return (highest_nbr);
 }
 
-void ft_stack_size_plus3(t_list **l_numbers)
+//encontrar el menor numero, rotarlo al top, push b
+void ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers)
 {
 	int i;
 	int lst_size;
 	t_list *tmp;
+	t_list *lowest_number;
 
 	i = 0;
 	tmp = (*l_numbers);
@@ -225,21 +226,22 @@ void ft_stack_size_plus3(t_list **l_numbers)
 		si la posicion de número en la lista es inferior a la mitad reverse_rotate_a
 		si la posicion de número en la lista es superior a la mitad rotate_a
 	*/
-	(*l_numbers) =  ft_return_lowerst_number(*l_numbers);
-	while (tmp != (*l_numbers)) // checkear la posicion del numero en la lista.
+	lowest_number =  ft_return_lowerst_number(*l_numbers);
+	printf("lower number%i\n", *(int *)lowest_number->content);
+	while (tmp != lowest_number) // checkear la posicion del numero en la lista.
 	{
 		tmp = tmp->next;
 		i++;
 	}
-	printf("que iso aaaa%i\n", i);
+	//printf("que iso aaaa%i\n", i);
 
 
 	lst_size = ft_lstsize(*l_numbers); // calcular el tamaño de la lista.
-	printf("%i\n", lst_size);
+	printf("la pos de min es %i\n", lst_size);
 
-	ft_printf("imprime la listatesting: %i\n", *(int *)(*l_numbers)->content);
+	//ft_printf("imprime la listatesting: %i\n", *(int *)(*l_numbers)->content);
 	if (i > (lst_size / 2)) // si es inferior a la mitad de la lista vas a hacer reverse rotate
-		while(i <= lst_size)
+		while(i < lst_size)
 		{
 			ft_reverse_rotate_a(l_numbers);
 			i++;
@@ -247,27 +249,28 @@ void ft_stack_size_plus3(t_list **l_numbers)
 	else
 		while(i) // si es superior a la mitad de la lista vas a hacer reverse rotate
 		{
-			ft_reverse_rotate_a(l_numbers);
+			ft_rotate_a(l_numbers);
 			i--;
 		}
 
-	printf("que iso rthwbjriojvñaejñavj%i %i\n", i, j);
+//	printf("que iso rthwbjriojvñaejñavj%i\n", i);
 	/*aquí tendría que ir la funcion de pushear al stack b el número, dando por hecho que ya está en la primera posición*/
 	ft_push_b(l_numbers, lb_numbers);
 }
 
-void	ft_sort_stack(t_list **l_numbers)
+void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
 {
 	t_list *h_tmp;
 	t_list *l_tmp;
 
-
-	l_tmp = ft_return_lowerst_number(*l_numbers);
-	h_tmp = ft_return_highest_number(*l_numbers);
+	//l_tmp = ft_return_lowerst_number(*l_numbers);
+	//h_tmp = ft_return_highest_number(*l_numbers);
 	while (ft_lstsize(*l_numbers) > 3)
 	{
-		ft_stack_size_plus3(l_numbers);
+		ft_stack_size_plus3(l_numbers, lb_numbers);
 	}
+	l_tmp = ft_return_lowerst_number(*l_numbers);
+	h_tmp = ft_return_highest_number(*l_numbers);
 	if (ft_lstsize(*l_numbers) == 3) //mientras el stack a sea menor o igual que 10
 	{
 		if ((*l_numbers)->next->content == l_tmp->content && (*l_numbers)->next->next->content == h_tmp->content)
@@ -328,7 +331,7 @@ void	ft_push_swap(int ac, char **av)
 	//ft_push_b(&l_numbers, &lb_numbers);
 	//ft_rotate_a(&l_numbers);
 	//ft_reverse_rotate_a(&l_numbers);
-	ft_sort_stack(&l_numbers);
+	ft_sort_stack(&l_numbers, &lb_numbers);
 	//ft_return_lowerst_number(&l_numbers);
 
 	printf("este es el stack B despues de la llamada a la funcion\n");
