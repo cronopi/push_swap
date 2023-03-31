@@ -51,6 +51,28 @@ void ft_push_b(t_list **l_numbers, t_list **lb_numbers)
 	//ft_print_stack(l_numbers, lb_numbers, 'b');
 }
 
+void ft_push_a(t_list **l_numbers, t_list **lb_numbers)
+{
+	t_list	*back_up;
+	t_list	*new_numbers;
+	int	*duplicate;
+
+	duplicate = (int *)(*lb_numbers)->content;
+	new_numbers = ft_lstnew(duplicate);
+
+	ft_lstadd_back(l_numbers, new_numbers);
+	back_up = (*lb_numbers)->next;
+	//free(*lb_numbers);
+	(*lb_numbers)->next = NULL;
+	(*lb_numbers) = back_up;
+
+	//printf("este es durante el push_b\n");
+	//printf("imprimes a\n");
+	//ft_print_stack(l_numbers, lb_numbers, 'a');
+	//printf("imprimes b\n");
+	//ft_print_stack(l_numbers, lb_numbers, 'b');
+}
+
 void ft_rotate_a(t_list **l_numbers)
 {
 	t_list *tmp;
@@ -184,12 +206,19 @@ int	ft_check_numbers(char **av, int ac)
 	return (1);
 }
 
-t_list *ft_return_lowerst_number(t_list *l_numbers)
+t_list *ft_return_lowerst_number(t_list *l_numbers) // (t_list *l_numbers, key_nbr)
 {
 	t_list *low_nbr;
+	/*
+	int test;
+	
+	test = 0;
+	tener una variable que pueda recoger lo que necesite dependiendo de la llamada
+	para el bucle while test = null test = 25 test = 50
+	*/ 
 
 	low_nbr = l_numbers;
-	while (l_numbers != NULL)
+	while (l_numbers != NULL) // key_nbr;
 	{
 		if (*(int *)low_nbr->content > *(int *)l_numbers->content)
 			low_nbr = l_numbers;
@@ -212,8 +241,7 @@ t_list *ft_return_highest_number(t_list *l_numbers)
 	return (highest_nbr);
 }
 
-//encontrar el menor numero, rotarlo al top, push b
-void ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers)
+void ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers) //(t_list **l_numbers, t_list **lb_numbers, key_nbr)
 {
 	int i;
 	int lst_size;
@@ -226,15 +254,14 @@ void ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers)
 		si la posicion de número en la lista es inferior a la mitad reverse_rotate_a
 		si la posicion de número en la lista es superior a la mitad rotate_a
 	*/
-	lowest_number =  ft_return_lowerst_number(*l_numbers);
+	lowest_number =  ft_return_lowerst_number(*l_numbers); //(*l_numbers, key_nbr)
 	printf("lower number%i\n", *(int *)lowest_number->content);
+
 	while (tmp != lowest_number) // checkear la posicion del numero en la lista.
 	{
 		tmp = tmp->next;
 		i++;
 	}
-	//printf("que iso aaaa%i\n", i);
-
 
 	lst_size = ft_lstsize(*l_numbers); // calcular el tamaño de la lista.
 	printf("la pos de min es %i\n", lst_size);
@@ -253,49 +280,88 @@ void ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers)
 			i--;
 		}
 
-//	printf("que iso rthwbjriojvñaejñavj%i\n", i);
-	/*aquí tendría que ir la funcion de pushear al stack b el número, dando por hecho que ya está en la primera posición*/
+	//printf("que iso rthwbjriojvñaejñavj%i\n", i);
 	ft_push_b(l_numbers, lb_numbers);
 }
 
 void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
 {
-	t_list *h_tmp;
-	t_list *l_tmp;
+	t_list	*h_tmp;
+	t_list	*l_tmp;
+	t_list	*tmp;
+	int	lst_size_Stack_A;
+	int key_nbr;
+	int i;
+	int j;
 
-	//l_tmp = ft_return_lowerst_number(*l_numbers);
-	//h_tmp = ft_return_highest_number(*l_numbers);
-	while (ft_lstsize(*l_numbers) > 3)
+	j = 3;
+	key_nbr = 0;
+	lst_size_Stack_A = ft_lstsize(*l_numbers);
+	while(lst_size_Stack_A > 10 && lst_size_Stack_A <= 100 && j > 0)
 	{
-		ft_stack_size_plus3(l_numbers, lb_numbers);
+		tmp = (*l_numbers);
+		i = 0;
+		if (j == 2)
+			key_nbr = lst_size_Stack_A / 4; // el 25% de los números
+		if (j == 1)
+			key_nbr = lst_size_Stack_A / 2; // el 50% de los números
+		while (i < key_nbr)
+		{
+			tmp = tmp->next;
+			i++;
+		}
+		while (ft_lstsize(*l_numbers) > 3 )// && key_nbr > 0 //tengo que decirle que solo cuente hasta la 25 posición
+		{
+			ft_stack_size_plus3(l_numbers, lb_numbers);
+			//ft_stack_size_plus3(l_numbers, lb_numbers, key_nbr);
+		}
+		j--;
 	}
+	else // lst_size_Stack_A <= 10
+		while (ft_lstsize(*l_numbers) > 3)
+		{
+			ft_stack_size_plus3(l_numbers, lb_numbers);
+		}
+	//key_nbr = 0; no haría falta pero es más correcto.
 	l_tmp = ft_return_lowerst_number(*l_numbers);
 	h_tmp = ft_return_highest_number(*l_numbers);
 	if (ft_lstsize(*l_numbers) == 3) //mientras el stack a sea menor o igual que 10
 	{
 		if ((*l_numbers)->next->content == l_tmp->content && (*l_numbers)->next->next->content == h_tmp->content)
 		{
+			printf("maradona\n");
 			ft_swap_a(l_numbers);
 		}
 		else if ((*l_numbers)->content == h_tmp->content && (*l_numbers)->next->next->content == l_tmp->content)
 		{
+			printf("maradona2\n");
 			ft_swap_a(l_numbers);
 			ft_reverse_rotate_a(l_numbers);
 		}
 		else if ((*l_numbers)->content == h_tmp->content && (*l_numbers)->next->content == l_tmp->content)
 		{
+			printf("maradona3\n");
 			ft_rotate_a(l_numbers);
 		}
 		else if ((*l_numbers)->content == l_tmp->content && (*l_numbers)->next->content == h_tmp->content)
 		{
+			printf("maradona4\n");
 			ft_swap_a(l_numbers);
 			ft_rotate_a(l_numbers);
 		}
 		else if ((*l_numbers)->next->content == h_tmp->content && (*l_numbers)->next->next->content == l_tmp->content)
 		{
+			printf("maradona5\n");
 			ft_reverse_rotate_a(l_numbers);
 		}
 	}
+	while (ft_lstsize(*lb_numbers) != 0)
+	{
+		ft_push_a(l_numbers, lb_numbers);
+	}
+	ft_rotate_a(l_numbers);
+	ft_rotate_a(l_numbers);
+	ft_rotate_a(l_numbers);
 }
 
 void	ft_push_swap(int ac, char **av)
@@ -347,5 +413,6 @@ void	ft_push_swap(int ac, char **av)
 int	main(int ac, char **av)
 {
 	ft_push_swap(ac ,av);
+	system
 	return (0);
 }
