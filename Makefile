@@ -11,8 +11,8 @@ SRC = ft_push_swap.c ft_print_stack.c
 OBJ = $(SRC:.c=.o)
 #INCLUDE = push_swap.h
 
-#%.o: %.c
-#	$(CC) $(FLAGS) -c -o $@ $<
+%.o: %.c
+	$(CC) $(FLAGS) -c -o $@ $<
 
 all: $(NAME)
 

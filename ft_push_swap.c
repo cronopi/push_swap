@@ -112,7 +112,6 @@ void ft_rotate_both(t_list **l_numbers, t_list **lb_numbers)
 void ft_reverse_rotate_a(t_list **l_numbers)
 {
 	t_list *last;
-	t_list *first;
 	t_list *tmp;
 
 	if (ft_lstsize(*l_numbers) <= 1)
@@ -135,7 +134,6 @@ void ft_reverse_rotate_a(t_list **l_numbers)
 void ft_reverse_rotate_b(t_list **lb_numbers)
 {
 	t_list *last;
-	t_list *first;
 	t_list *tmp;
 
 	if (ft_lstsize(*lb_numbers) <= 1)
@@ -211,11 +209,11 @@ t_list *ft_return_lowerst_number(t_list *l_numbers) // (t_list *l_numbers, key_n
 	t_list *low_nbr;
 	/*
 	int test;
-	
+
 	test = 0;
 	tener una variable que pueda recoger lo que necesite dependiendo de la llamada
 	para el bucle while test = null test = 25 test = 50
-	*/ 
+	*/
 
 	low_nbr = l_numbers;
 	while (l_numbers != NULL) // key_nbr;
@@ -284,8 +282,37 @@ void ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers) //(t_list **l_
 	ft_push_b(l_numbers, lb_numbers);
 }
 
+t_list *ft_duplicate_list(t_list *l_numbers, t_list *lk_numbers)
+{
+	t_list *new_numbers;
+	int *nbr;
+	while(l_numbers != NULL)
+	{
+		nbr = malloc(sizeof(int));
+		*nbr = *(int *)l_numbers->content;
+		new_numbers = ft_lstnew(nbr);
+		ft_lstadd_back(&lk_numbers, new_numbers);
+		l_numbers = l_numbers->next;
+	}
+	return (lk_numbers);
+}
+
+void sort_stack_K(t_list **lk_numbers)
+{
+	int key_nbr;
+	int i;
+
+	i = 0;
+	key_nbr = ft_lstsize(*lk_numbers) / 4;
+	while ((*lk_numbers)->content <= key_nbr)
+	{
+		i++;
+	}
+}
+
 void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
 {
+	t_list	*lk_numbers;
 	t_list	*h_tmp;
 	t_list	*l_tmp;
 	t_list	*tmp;
@@ -296,32 +323,39 @@ void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
 
 	j = 3;
 	key_nbr = 0;
+	lk_numbers = NULL;
 	lst_size_Stack_A = ft_lstsize(*l_numbers);
-	while(lst_size_Stack_A > 10 && lst_size_Stack_A <= 100 && j > 0)
-	{
-		tmp = (*l_numbers);
-		i = 0;
-		if (j == 2)
-			key_nbr = lst_size_Stack_A / 4; // el 25% de los números
-		if (j == 1)
-			key_nbr = lst_size_Stack_A / 2; // el 50% de los números
-		while (i < key_nbr)
+
+	lk_numbers = ft_duplicate_list(*l_numbers, lk_numbers);
+	ft_print_stack(l_numbers, &lk_numbers, 'b');
+	sort_stack_K(lk_numbers);
+
+	if (lst_size_Stack_A > 10 && lst_size_Stack_A <= 100)
+		while(j > 0)
 		{
-			tmp = tmp->next;
-			i++;
+			tmp = (*l_numbers);
+			i = 0;
+			if (j == 2)
+				key_nbr = lst_size_Stack_A / 4; // el 25% de los números
+			if (j == 1)
+				key_nbr = lst_size_Stack_A / 2; // el 50% de los números
+			while (i < key_nbr)
+			{
+				tmp = tmp->next;
+				i++;
+			}
+			while (ft_lstsize(*l_numbers) > 3 )// && key_nbr > 0 //tengo que decirle que solo cuente hasta la 25 posición
+			{
+				ft_stack_size_plus3(l_numbers, lb_numbers);
+				//ft_stack_size_plus3(l_numbers, lb_numbers, key_nbr);
+			}
+			j--;
 		}
-		while (ft_lstsize(*l_numbers) > 3 )// && key_nbr > 0 //tengo que decirle que solo cuente hasta la 25 posición
-		{
-			ft_stack_size_plus3(l_numbers, lb_numbers);
-			//ft_stack_size_plus3(l_numbers, lb_numbers, key_nbr);
-		}
-		j--;
-	}
 	else // lst_size_Stack_A <= 10
-		while (ft_lstsize(*l_numbers) > 3)
-		{
-			ft_stack_size_plus3(l_numbers, lb_numbers);
-		}
+	while (ft_lstsize(*l_numbers) > 3)
+	{
+		ft_stack_size_plus3(l_numbers, lb_numbers);
+	}
 	//key_nbr = 0; no haría falta pero es más correcto.
 	l_tmp = ft_return_lowerst_number(*l_numbers);
 	h_tmp = ft_return_highest_number(*l_numbers);
@@ -378,7 +412,6 @@ void	ft_push_swap(int ac, char **av)
 	lb_numbers = NULL;
 	if (ft_check_numbers(av, ac) == 0)
 		return ;
-
 	while (i < ac)
 	{
 		nbr = malloc(sizeof(int));
@@ -413,6 +446,16 @@ void	ft_push_swap(int ac, char **av)
 int	main(int ac, char **av)
 {
 	ft_push_swap(ac ,av);
-	system
+	//system
 	return (0);
 }
+
+
+/*
+	stack a = 5 6 4 9 2 10 7 3 8 1
+
+	stack k = 5 6 4 9 2 10 7 3 8 1
+	stack k = 1 2 3 4 5 6 7 8 9 10
+
+
+*/
