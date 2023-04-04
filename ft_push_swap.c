@@ -304,8 +304,9 @@ void sort_stack_K(t_list **lk_numbers)
 
 	i = 0;
 	key_nbr = ft_lstsize(*lk_numbers) / 4;
-	while ((*lk_numbers)->content <= key_nbr)
+	while (i <= key_nbr)
 	{
+		(*lk_numbers)->content =
 		i++;
 	}
 }
