@@ -297,18 +297,27 @@ t_list *ft_duplicate_list(t_list *l_numbers, t_list *lk_numbers)
 	return (lk_numbers);
 }
 
-void sort_stack_K(t_list **lk_numbers)
+void sort_stack_K(t_list **lk_numbers) // 3 10 8  // 9 3 6 8 2 1
 {
 	int key_nbr;
 	int i;
 
-	i = 0;
+	i = ft_lst_size(*lk_numbers);
+	while (i >= 0)
+	{
+		if (lk_numbers->content < lk_numbers->next->content)
+			ft_swap_a(lk_numbers, lk_numbers->next);
+		lk_numbers = lk_numbers->next
+	}
+
+	/* 
 	key_nbr = ft_lstsize(*lk_numbers) / 4;
 	while (i <= key_nbr)
 	{
-		(*lk_numbers)->content =
+		(*lk_numbers) = (*lk_numbers)->next
 		i++;
-	}
+	} */
+
 }
 
 void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
@@ -316,13 +325,9 @@ void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
 	t_list	*lk_numbers;
 	t_list	*h_tmp;
 	t_list	*l_tmp;
-	t_list	*tmp;
 	int	lst_size_Stack_A;
 	int key_nbr;
-	int i;
-	int j;
 
-	j = 3;
 	key_nbr = 0;
 	lk_numbers = NULL;
 	lst_size_Stack_A = ft_lstsize(*l_numbers);
@@ -332,26 +337,12 @@ void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
 	sort_stack_K(lk_numbers);
 
 	if (lst_size_Stack_A > 10 && lst_size_Stack_A <= 100)
-		while(j > 0)
+	{
+		while (ft_lstsize(*l_numbers) > 3 )// && key_nbr > 0 //tengo que decirle que solo cuente hasta la 25 posición
 		{
-			tmp = (*l_numbers);
-			i = 0;
-			if (j == 2)
-				key_nbr = lst_size_Stack_A / 4; // el 25% de los números
-			if (j == 1)
-				key_nbr = lst_size_Stack_A / 2; // el 50% de los números
-			while (i < key_nbr)
-			{
-				tmp = tmp->next;
-				i++;
-			}
-			while (ft_lstsize(*l_numbers) > 3 )// && key_nbr > 0 //tengo que decirle que solo cuente hasta la 25 posición
-			{
-				ft_stack_size_plus3(l_numbers, lb_numbers);
-				//ft_stack_size_plus3(l_numbers, lb_numbers, key_nbr);
-			}
-			j--;
+
 		}
+	}
 	else // lst_size_Stack_A <= 10
 	while (ft_lstsize(*l_numbers) > 3)
 	{
@@ -360,7 +351,7 @@ void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
 	//key_nbr = 0; no haría falta pero es más correcto.
 	l_tmp = ft_return_lowerst_number(*l_numbers);
 	h_tmp = ft_return_highest_number(*l_numbers);
-	if (ft_lstsize(*l_numbers) == 3) //mientras el stack a sea menor o igual que 10
+	if (ft_lstsize(*l_numbers) == 3)
 	{
 		if ((*l_numbers)->next->content == l_tmp->content && (*l_numbers)->next->next->content == h_tmp->content)
 		{
