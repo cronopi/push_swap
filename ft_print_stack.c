@@ -7,6 +7,7 @@ void	ft_putlst(t_list *lst)
 		ft_printf("imprime la lista: %i\n", *(int *)lst->content);
 		lst = lst->next;
 	}
+	ft_printf("_________________________________\n");
 }
 
 void ft_print_stack(t_list **l_numbers, t_list **lb_numbers, char stack)
