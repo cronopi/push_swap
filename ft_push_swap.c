@@ -285,7 +285,7 @@ t_list *ft_duplicate_list(t_list *l_numbers, t_list *lk_numbers)
 	return (lk_numbers);
 }
 
-void sort_stack_K(t_list **lk_numbers)
+void sort_stack_K(t_list **lk_numbers) // 3 10 8  // 9 3 6 8 2 1
 {
 	t_list *lk_bside_numbers;
 	t_list	*h_tmp;
@@ -371,7 +371,7 @@ void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
 	//key_nbr = 0; no haría falta pero es más correcto.
 	l_tmp = ft_return_lowerst_number(*l_numbers);
 	h_tmp = ft_return_highest_number(*l_numbers);
-	if (ft_lstsize(*l_numbers) == 3) //mientras el stack a sea menor o igual que 10
+	if (ft_lstsize(*l_numbers) == 3)
 	{
 		if ((*l_numbers)->next->content == l_tmp->content && (*l_numbers)->next->next->content == h_tmp->content)
 		{
