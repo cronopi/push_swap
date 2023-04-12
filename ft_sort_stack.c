@@ -18,30 +18,32 @@ void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
 		lk_numbers = ft_duplicate_list(*l_numbers, lk_numbers);
 		sort_stack_K(&lk_numbers);
 
-		tmp = lk_numbers;
-		while (i < 25 && i < (lst_size_Stack_A - 1))
+		while ()
 		{
-			tmp = tmp->next;
-			i++;
-		}
-		key_nbr = *(int *)tmp->content;
-		ft_printf("dytysdyts: %i\n", key_nbr);
-
-		tmp = (*l_numbers);
-		while(tmp != NULL)
-		{
-			if (*(int *)tmp->content <= key_nbr)
+			tmp = lk_numbers;
+			while (i < lst_size_Stack_A / 4) && i < (lst_size_Stack_A - 1))
 			{
-				while(tmp != (*l_numbers))
-				{
-					ft_reverse_rotate_a(l_numbers);
-				}
-				ft_push_b(l_numbers, lb_numbers);
-				tmp = (*l_numbers);
+				tmp = tmp->next;
+				i++;
 			}
-			tmp = tmp->next;
-		}
+			key_nbr = *(int *)tmp->content;
+			ft_printf("dytysdyts: %i\n", key_nbr);
 
+			tmp = (*l_numbers);
+			while(tmp != NULL)
+			{
+				if (*(int *)tmp->content <= key_nbr)
+				{
+					while(tmp != (*l_numbers))
+					{
+						ft_reverse_rotate_a(l_numbers);
+					}
+					ft_push_b(l_numbers, lb_numbers);
+					tmp = (*l_numbers);
+				}
+				tmp = tmp->next;
+			}
+		}
 		printf("este es el stack B en la funcion\n");
 		ft_print_stack(l_numbers, lb_numbers, 'b');
 
