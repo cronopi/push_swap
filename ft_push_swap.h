@@ -7,6 +7,7 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
+void	ft_sort_3(t_list **l_numbers, t_list **lb_numbers);
 void	ft_push_a(t_list **l_numbers, t_list **lb_numbers);
 void	ft_push_b(t_list **l_numbers, t_list **lb_numbers);
 void	swap_stack(t_list *a, t_list *b);
