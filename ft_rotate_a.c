@@ -13,4 +13,5 @@ void ft_rotate_a(t_list **l_numbers)
 	last = ft_lstlast(*l_numbers);
 	last->next = tmp;
 	tmp->next = NULL;
+	write(1,"ra\n", 3);
 }

@@ -6,4 +6,5 @@ void ft_swap_a(t_list **l_numbers)
 		return ;
 
 	swap_stack((*l_numbers), (*l_numbers)->next);
+	write(1,"sa\n", 3);
 }

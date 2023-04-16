@@ -29,6 +29,5 @@ void	sort_stack_K(t_list **lk_numbers);
 void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers);
 void	ft_print_stack(t_list **l_numbers, t_list **lb_numbers, char stack);
 void	ft_push_swap(int ac, char **av);
-int		ft_atoi(const char *str);
 
 #endif

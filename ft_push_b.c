@@ -14,4 +14,5 @@ void ft_push_b(t_list **l_numbers, t_list **lb_numbers)
 	free(*l_numbers);
 	(*l_numbers)->next = NULL;
 	(*l_numbers) = back_up;
+	write(1,"pb\n", 3);
 }

@@ -20,4 +20,5 @@ void ft_reverse_rotate_a(t_list **l_numbers)
 	}
 	tmp->next = NULL;
 	//ft_printf("imprime a ver : %i\n", *(int *)(*l_numbers)->content);
+	write(1,"rra\n", 4);
 }

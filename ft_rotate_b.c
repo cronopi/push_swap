@@ -13,4 +13,5 @@ void ft_rotate_b(t_list **lb_numbers)
 	last = ft_lstlast(*lb_numbers);
 	last->next = tmp;
 	tmp->next = NULL;
+	write(1,"rb\n", 3);
 }

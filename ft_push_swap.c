@@ -1,12 +1,13 @@
 #include "ft_push_swap.h"
 
-/*ft_sort_stack();
-	// " 3 9 6 7 78" tiene que coger los números por separado.
+/*
+"3 9 6 7 78" tiene que coger los números por separado.
 */
 
 void	ft_push_swap(int ac, char **av)
 {
 	int i;
+	int j;
 	int *nbr;
 	t_list *new_numbers;
 
@@ -14,38 +15,54 @@ void	ft_push_swap(int ac, char **av)
 	t_list *lb_numbers;
 
 	i = 1;
+	j = 0;
 	l_numbers = NULL;
 	lb_numbers = NULL;
 	if (ft_check_numbers(av, ac) == 0)
 		return ;
+
 	while (i < ac)
 	{
+		//esto es igual
+		if (av[i][j])
+		{
+			while (av[i][j] && av[i][j] == ' ')
+				j++;
+		}
+		if(!av[i][j])
+		{
+			j = 0;
+			i++;
+		}
+
 		nbr = malloc(sizeof(int));
 		if (!nbr)
 			return ;
-		*nbr = ft_atoi(av[i]);
+		*nbr = ft_atoi(&av[i][j]);
 		new_numbers = ft_lstnew(nbr);
 		ft_lstadd_back(&l_numbers, new_numbers);
-		i++;
+		while(av[i][j] && av[i][j] != ' ')
+		{
+			j++;
+		}
+		//a esto
+		if (av[i][j])
+		{
+			while (av[i][j] && av[i][j] == ' ')
+				j++;
+		}
+		if(!av[i][j])
+		{
+			j = 0;
+			i++;
+		}
+
 	}
 	if (ft_check_for_duplicates(l_numbers) == 0)
 		return ;
-	//ft_swap_a(&l_numbers);
-	//ft_swap_b(t_list **lb_numbers)
-	//ft_push_b(&l_numbers, &lb_numbers);
-	//ft_rotate_a(&l_numbers);
-	//ft_reverse_rotate_a(&l_numbers);
+
 	ft_sort_stack(&l_numbers, &lb_numbers);
-	//ft_return_lowerst_number(&l_numbers);
-
-/*	printf("este es el stack B despues de la llamada a la funcion\n");
-	ft_print_stack(&l_numbers, &lb_numbers, 'b');
-
-	printf("este es el stack A despues de la llamada a la funcion\n");
-	ft_print_stack(&l_numbers, &lb_numbers, 'a');
-
-*/
-
+	ft_print_stack(&l_numbers, &lb_numbers, 's');
 	ft_lstclear(&l_numbers, &free);
 	ft_lstclear(&lb_numbers, &free);
 }

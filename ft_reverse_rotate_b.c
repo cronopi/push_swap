@@ -19,5 +19,5 @@ void ft_reverse_rotate_b(t_list **lb_numbers)
 		tmp = tmp->next;
 	}
 	tmp->next = NULL;
-	//ft_printf("imprime a ver : %i\n", *(int *)(*lb_numbers)->content);
+	write(1,"rrb\n", 4);
 }
