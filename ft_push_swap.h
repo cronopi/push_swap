@@ -24,7 +24,7 @@ int		ft_check_numbers(char **av, int ac);
 t_list	*ft_return_lowerst_number(t_list *l_numbers);
 t_list	*ft_return_highest_number(t_list *l_numbers);
 t_list	*ft_duplicate_list(t_list *l_numbers, t_list *lk_numbers);
-void	ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers);
+void	ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers, int higher_lower);
 void	sort_stack_K(t_list **lk_numbers);
 void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers);
 void	ft_print_stack(t_list **l_numbers, t_list **lb_numbers, char stack);

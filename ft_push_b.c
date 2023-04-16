@@ -9,7 +9,7 @@ void ft_push_b(t_list **l_numbers, t_list **lb_numbers)
 	duplicate = (int *)(*l_numbers)->content;
 	new_numbers = ft_lstnew(duplicate);
 
-	ft_lstadd_back(lb_numbers, new_numbers);
+	ft_lstadd_front(lb_numbers, new_numbers);
 	back_up = (*l_numbers)->next;
 	free(*l_numbers);
 	(*l_numbers)->next = NULL;

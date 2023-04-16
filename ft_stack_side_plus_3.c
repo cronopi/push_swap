@@ -1,22 +1,19 @@
 #include "ft_push_swap.h"
 
-void ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers)
+void ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers, int higher_lower)
 {
 	int i;
 	int lst_size;
 	t_list *tmp;
-	t_list *lowest_number;
+	t_list *number;
 
 	i = 0;
 	tmp = (*l_numbers);
-	/*
-		si la posicion de número en la lista es inferior a la mitad reverse_rotate_a
-		si la posicion de número en la lista es superior a la mitad rotate_a
-	*/
-	lowest_number =  ft_return_lowerst_number(*l_numbers); //(*l_numbers, key_nbr)
-	//printf("lower number%i\n", *(int *)lowest_number->content);
-
-	while (tmp != lowest_number) // checkear la posicion del numero en la lista.
+	if (higher_lower == 1)
+		number =  ft_return_lowerst_number(*l_numbers);
+	else
+		number = ft_return_highest_number(*l_numbers);
+	while (tmp != number) // checkear la posicion del numero en la lista.
 	{
 		tmp = tmp->next;
 		i++;
@@ -38,7 +35,5 @@ void ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers)
 			ft_rotate_a(l_numbers);
 			i--;
 		}
-
-	//printf("que iso rthwbjriojvñaejñavj%i\n", i);
 	ft_push_b(l_numbers, lb_numbers);
 }
