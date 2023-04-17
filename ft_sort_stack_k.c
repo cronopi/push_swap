@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_sort_stack_k.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/17 09:53:15 by rcastano          #+#    #+#             */
+/*   Updated: 2023/04/17 10:25:52 by rcastano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_push_swap.h"
 
-void sort_stack_K(t_list **lk_numbers)
+void	sort_stack_k(t_list **lk_numbers)
 {
-	t_list *lk_bside_numbers;
+	t_list	*lk_bside_numbers;
 
 	lk_bside_numbers = NULL;
 	while (ft_lstsize(*lk_numbers) > 3)

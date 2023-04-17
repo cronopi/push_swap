@@ -1,39 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_stack_side_plus_3.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/17 09:55:43 by rcastano          #+#    #+#             */
+/*   Updated: 2023/04/17 10:22:25 by rcastano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_push_swap.h"
 
-void ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers, int higher_lower)
+void	ft_rotate_direction(t_list **l_numbers, t_list **lb_numbers, int i)
 {
-	int i;
-	int lst_size;
-	t_list *tmp;
-	t_list *number;
+	int		lst_size;
 
-	i = 0;
-	tmp = (*l_numbers);
-	if (higher_lower == 1)
-		number =  ft_return_lowerst_number(*l_numbers);
-	else
-		number = ft_return_highest_number(*l_numbers);
-	while (tmp != number) // checkear la posicion del numero en la lista.
+	lst_size = ft_lstsize(*l_numbers);
+	if (i > (lst_size / 2))
 	{
-		tmp = tmp->next;
-		i++;
-	}
-
-	lst_size = ft_lstsize(*l_numbers); // calcular el tamaño de la lista.
-	//printf("la pos de min es %i\n", lst_size);
-
-	//ft_printf("imprime la listatesting: %i\n", *(int *)(*l_numbers)->content);
-	if (i > (lst_size / 2)) // si es inferior a la mitad de la lista vas a hacer reverse rotate
-		while(i < lst_size)
+		while (i < lst_size)
 		{
 			ft_reverse_rotate_a(l_numbers);
 			i++;
 		}
+	}
 	else
-		while(i) // si es superior a la mitad de la lista vas a hacer reverse rotate
+	{
+		while (i)
 		{
 			ft_rotate_a(l_numbers);
 			i--;
 		}
+	}
 	ft_push_b(l_numbers, lb_numbers);
+}
+
+void	ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers, int h_l)
+{
+	int		i;
+	t_list	*tmp;
+	t_list	*number;
+
+	i = 0;
+	tmp = (*l_numbers);
+	if (h_l == 1)
+		number = ft_return_lowerst_number(*l_numbers);
+	else
+		number = ft_return_highest_number(*l_numbers);
+	while (tmp != number)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	ft_rotate_direction(l_numbers, lb_numbers, i);
 }

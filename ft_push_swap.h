@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_push_swap.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/17 09:29:57 by rcastano          #+#    #+#             */
+/*   Updated: 2023/04/17 10:25:43 by rcastano         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_PUSH_SWAP_H
 # define FT_PUSH_SWAP_H
 
@@ -24,8 +36,8 @@ int		ft_check_numbers(char **av, int ac);
 t_list	*ft_return_lowerst_number(t_list *l_numbers);
 t_list	*ft_return_highest_number(t_list *l_numbers);
 t_list	*ft_duplicate_list(t_list *l_numbers, t_list *lk_numbers);
-void	ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers, int higher_lower);
-void	sort_stack_K(t_list **lk_numbers);
+void	ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers, int h_l);
+void	sort_stack_k(t_list **lk_numbers);
 void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers);
 void	ft_print_stack(t_list **l_numbers, t_list **lb_numbers, char stack);
 void	ft_push_swap(int ac, char **av);
