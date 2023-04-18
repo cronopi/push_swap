@@ -6,19 +6,21 @@
 /*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:51:26 by rcastano          #+#    #+#             */
-/*   Updated: 2023/04/17 12:18:57 by rcastano         ###   ########.fr       */
+/*   Updated: 2023/04/18 07:43:39 by rcastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	buble_sort(t_list *tmp, int lst, t_list **l, t_list **lb, int j)
+void	buble_sort(t_list *tmp, int lst, t_list **l, t_list **lb)
 {
-	int	key_nbr;
-	int	i;
+	int			key_nbr;
+	int			i;
+	static int	j;
 
 	i = 0;
-	while (i < (lst / 4) * (j + 1) && i < (lst - 1))
+	j = 1 + j;
+	while (i < (lst / 4) * (j) && i < (lst - 1))
 	{
 		tmp = tmp->next;
 		i++;
@@ -51,7 +53,7 @@ void	stack_a_size_10_100(t_list **l_num, t_list **lb_num, int lst_size_sa)
 	while (j < 3)
 	{
 		tmp = lk_numbers;
-		buble_sort(tmp, lst_size_sa, l_num, lb_num, j);
+		buble_sort(tmp, lst_size_sa, l_num, lb_num);
 		j++;
 	}
 }

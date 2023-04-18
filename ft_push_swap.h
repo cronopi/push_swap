@@ -6,7 +6,7 @@
 /*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:29:57 by rcastano          #+#    #+#             */
-/*   Updated: 2023/04/17 10:25:43 by rcastano         ###   ########.fr       */
+/*   Updated: 2023/04/18 09:13:36 by rcastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void	sort_stack_k(t_list **lk_numbers);
 void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers);
 void	ft_print_stack(t_list **l_numbers, t_list **lb_numbers, char stack);
 void	ft_push_swap(int ac, char **av);
+void	ft_swap_both_stacks(t_list **l_numbers, t_list **lb_numbers);
 
 #endif

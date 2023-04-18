@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_a.c                                        :+:      :+:    :+:   */
+/*   ft_swap_both_stacks.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/17 09:23:11 by rcastano          #+#    #+#             */
-/*   Updated: 2023/04/18 11:12:09 by rcastano         ###   ########.fr       */
+/*   Created: 2023/04/18 09:41:16 by rcastano          #+#    #+#             */
+/*   Updated: 2023/04/18 09:41:16 by rcastano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	ft_push_a(t_list **l_numbers, t_list **lb_numbers)
+void	ft_swap_both_stacks(t_list **l_numbers, t_list **lb_numbers)
 {
-	t_list	*back_up;
-	t_list	*new_numbers;
-	int		*duplicate;
-
-	duplicate = (int *)(*lb_numbers)->content;
-	new_numbers = ft_lstnew(duplicate);
-	ft_lstadd_front(l_numbers, new_numbers);
-	back_up = (*lb_numbers)->next;
-	(*lb_numbers)->next = NULL;
-	(*lb_numbers) = back_up;
-	write(1, "pa\n", 3);
+	ft_swap_a(l_numbers);
+	ft_swap_b(lb_numbers);
+	write(1, "ss\n", 3);
 }
