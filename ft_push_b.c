@@ -12,7 +12,7 @@
 
 #include "ft_push_swap.h"
 
-void	ft_push_b(t_list **l_numbers, t_list **lb_numbers)
+void	ft_push_b(t_list **l_numbers, t_list **lb_numbers, int print)
 {
 	t_list	*back_up;
 	t_list	*new_numbers;
@@ -23,6 +23,8 @@ void	ft_push_b(t_list **l_numbers, t_list **lb_numbers)
 	ft_lstadd_front(lb_numbers, new_numbers);
 	back_up = (*l_numbers)->next;
 	(*l_numbers)->next = NULL;
+	free(*l_numbers);
 	(*l_numbers) = back_up;
-	write(1, "pb\n", 3);
+	if (print == 1)
+		write(1, "pb\n", 3);
 }

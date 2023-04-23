@@ -19,14 +19,11 @@ void	sort_stack_k(t_list **lk_numbers)
 	lk_bside_numbers = NULL;
 	while (ft_lstsize(*lk_numbers) > 3)
 	{
-		ft_stack_size_plus3(lk_numbers, &lk_bside_numbers, 1);
+		ft_stack_size_plus3(lk_numbers, &lk_bside_numbers, 1, 0);
 	}
-	ft_sort_3(lk_numbers, &lk_bside_numbers);
+	ft_sort_3(lk_numbers, &lk_bside_numbers, 0);
 	while (ft_lstsize(lk_bside_numbers) != 0)
 	{
-		ft_push_a(lk_numbers, &lk_bside_numbers);
+		ft_push_a(lk_numbers, &lk_bside_numbers, 0);
 	}
-	ft_rotate_a(lk_numbers);
-	ft_rotate_a(lk_numbers);
-	ft_rotate_a(lk_numbers);
 }

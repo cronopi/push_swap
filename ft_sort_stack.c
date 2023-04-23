@@ -12,7 +12,7 @@
 
 #include "ft_push_swap.h"
 
-void	buble_sort(t_list *tmp, int lst, t_list **l, t_list **lb)
+void	buble_sort(t_list *lk_tmp, int lst, t_list **l, t_list **lb)
 {
 	int			key_nbr;
 	int			i;
@@ -20,25 +20,42 @@ void	buble_sort(t_list *tmp, int lst, t_list **l, t_list **lb)
 
 	i = 0;
 	j = 1 + j;
+	//ft_print_stack(&lk_tmp, &lk_tmp, 'a');
 	while (i < (lst / 4) * (j) && i < (lst - 1))
 	{
-		tmp = tmp->next;
+		lk_tmp = lk_tmp->next;
 		i++;
 	}
-	key_nbr = *(int *)tmp->content;
-	tmp = (*l);
-	while (tmp != NULL)
+	key_nbr = *(int *)lk_tmp->content;
+	lk_tmp = (*l);
+	i = 0;
+	while (lk_tmp != NULL)
 	{
-		if (*(int *)tmp->content <= key_nbr)
+		if (*(int *)lk_tmp->content <= key_nbr)
 		{
-			while (tmp != (*l))
-				ft_reverse_rotate_a(l);
-			ft_push_b(l, lb);
-			tmp = (*l);
+			ft_rotate_direction(l, lb, i, 1);
+			lk_tmp =  *l;
+			i = 0;
 		}
 		else
-			tmp = tmp->next;
+		{
+			lk_tmp = lk_tmp->next;
+			i++;
+		}
 	}
+
+	/* while (lk_tmp != NULL)
+	{
+		if (*(int *)lk_tmp->content <= key_nbr)
+		{
+			while (lk_tmp != (*l))
+				ft_reverse_rotate_a(l, 1);
+			ft_push_b(l, lb, 1);
+			lk_tmp = (*l);
+		}
+		else
+			lk_tmp = lk_tmp->next;
+	} */
 }
 
 void	stack_a_size_10_100(t_list **l_num, t_list **lb_num, int lst_size_sa)
@@ -50,15 +67,21 @@ void	stack_a_size_10_100(t_list **l_num, t_list **lb_num, int lst_size_sa)
 	j = 0;
 	lk_numbers = NULL;
 	lk_numbers = ft_duplicate_list(*l_num, lk_numbers);
+	sort_stack_k(&lk_numbers);
 	while (j < 3)
 	{
 		tmp = lk_numbers;
 		buble_sort(tmp, lst_size_sa, l_num, lb_num);
 		j++;
 	}
+	(void)tmp;
+	(void)lb_num;
+	(void)lst_size_sa;
+	//ft_print_stack(l_num, lb_num, 'q');
+	ft_lstclear(&lk_numbers, &free);
 }
 
-void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
+void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers, int print)
 {
 	int		lst_size_sa;
 
@@ -67,17 +90,19 @@ void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers)
 	{
 		stack_a_size_10_100(l_numbers, lb_numbers, lst_size_sa);
 		while (ft_lstsize(*l_numbers) > 3)
-			ft_stack_size_plus3(l_numbers, lb_numbers, 1);
-		ft_sort_3(l_numbers, lb_numbers);
+			ft_stack_size_plus3(l_numbers, lb_numbers, 1, print);
+		//ft_print_stack(l_numbers, lb_numbers, 'q');
+		ft_sort_3(l_numbers, lb_numbers, print);
 		while (ft_lstsize(*lb_numbers) > 0)
-			ft_stack_size_plus3(lb_numbers, l_numbers, 2);
+			ft_stack_size_plus3_b(lb_numbers, l_numbers, 2, print);
 	}
 	else
 	{
 		while (ft_lstsize(*l_numbers) > 3)
-			ft_stack_size_plus3(l_numbers, lb_numbers, 1);
-		ft_sort_3(l_numbers, lb_numbers);
+			ft_stack_size_plus3(l_numbers, lb_numbers, 1, print);
+		ft_sort_3(l_numbers, lb_numbers, print);
 		while (ft_lstsize(*lb_numbers) != 0)
-			ft_push_a(l_numbers, lb_numbers);
+			ft_push_a(l_numbers, lb_numbers, print);
 	}
+	(void)print;
 }

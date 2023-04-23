@@ -23,7 +23,7 @@ int	ft_check_numbers(char **av, int ac)
 	{
 		while (av[j][i])
 		{
-			if (av[j][i] != ' ' && !(av[j][i] >= '0' && av[j][i] <= '9'))
+			if (av[j][i] != '-' && av[j][i] != ' ' && !(av[j][i] >= '0' && av[j][i] <= '9'))
 			{
 				ft_printf("Error\n");
 				return (0);

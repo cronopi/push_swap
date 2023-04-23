@@ -12,7 +12,7 @@
 
 #include "ft_push_swap.h"
 
-void	ft_rotate_a(t_list **l_numbers)
+void	ft_rotate_a(t_list **l_numbers, int print)
 {
 	t_list	*tmp;
 	t_list	*last;
@@ -24,5 +24,6 @@ void	ft_rotate_a(t_list **l_numbers)
 	last = ft_lstlast(*l_numbers);
 	last->next = tmp;
 	tmp->next = NULL;
-	write(1, "ra\n", 3);
+	if (print == 1)
+		write(1, "ra\n", 3);
 }

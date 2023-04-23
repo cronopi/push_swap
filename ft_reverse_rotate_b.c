@@ -12,7 +12,7 @@
 
 #include "ft_push_swap.h"
 
-void	ft_reverse_rotate_b(t_list **lb_numbers)
+void	ft_reverse_rotate_b(t_list **lb_numbers, int print)
 {
 	t_list	*last;
 	t_list	*tmp;
@@ -27,5 +27,6 @@ void	ft_reverse_rotate_b(t_list **lb_numbers)
 		tmp = tmp->next;
 	}
 	tmp->next = NULL;
-	write(1, "rrb\n", 4);
+	if (print == 1)
+		write(1, "rrb\n", 4);
 }

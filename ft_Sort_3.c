@@ -12,24 +12,24 @@
 
 #include "ft_push_swap.h"
 
-void	ft_sort_3_more(t_list **l, t_list **lb, t_list	*h_tmp, t_list	*l_tmp)
+void	ft_sort_3_more(t_list **l, t_list **lb, t_list	*h_tmp, t_list	*l_tmp, int print)
 {
 	if ((*l)->content == h_tmp->content
 		&& (*l)->next->content == l_tmp->content)
-		ft_rotate_a(l);
+		ft_rotate_a(l, print);
 	else if ((*l)->content == l_tmp->content
 		&& (*l)->next->content == h_tmp->content)
 	{
-		ft_swap_a(l);
-		ft_rotate_a(l);
+		ft_swap_a(l, print);
+		ft_rotate_a(l, print);
 	}
 	else if ((*l)->next->content == h_tmp->content
 		&& (*l)->next->next->content == l_tmp->content)
-		ft_reverse_rotate_a(l);
+		ft_reverse_rotate_a(l, print);
 	(void)lb;
 }
 
-void	ft_sort_3(t_list **l_numbers, t_list **lb_numbers)
+void	ft_sort_3(t_list **l_numbers, t_list **lb_numbers, int print)
 {
 	t_list	*h_tmp;
 	t_list	*l_tmp;
@@ -40,14 +40,14 @@ void	ft_sort_3(t_list **l_numbers, t_list **lb_numbers)
 	{
 		if ((*l_numbers)->next->content == l_tmp->content
 			&& (*l_numbers)->next->next->content == h_tmp->content)
-			ft_swap_a(l_numbers);
+			ft_swap_a(l_numbers, print);
 		else if ((*l_numbers)->content == h_tmp->content
 			&& (*l_numbers)->next->next->content == l_tmp->content)
 		{
-			ft_swap_a(l_numbers);
-			ft_reverse_rotate_a(l_numbers);
+			ft_swap_a(l_numbers, print);
+			ft_reverse_rotate_a(l_numbers, print);
 		}
 		else
-			ft_sort_3_more(l_numbers, lb_numbers, h_tmp, l_tmp);
+			ft_sort_3_more(l_numbers, lb_numbers, h_tmp, l_tmp, print);
 	}
 }

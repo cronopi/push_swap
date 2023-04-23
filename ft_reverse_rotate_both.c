@@ -12,8 +12,10 @@
 
 #include "ft_push_swap.h"
 
-void	ft_reverse_rotate_both(t_list **l_numbers, t_list **lb_numbers)
+void	ft_reverse_rotate_both(t_list **l_numbers, t_list **lb_numbers, int print)
 {
-	ft_reverse_rotate_a(l_numbers);
-	ft_reverse_rotate_b(lb_numbers);
+	ft_reverse_rotate_a(l_numbers, 0);
+	ft_reverse_rotate_b(lb_numbers, 0);
+	if (print == 1)
+		write(1, "rrr\n", 4);
 }
