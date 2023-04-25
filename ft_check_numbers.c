@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_numbers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nazurmen <nazurmen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:19:58 by rcastano          #+#    #+#             */
-/*   Updated: 2023/04/17 09:19:59 by rcastano         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:41:25 by nazurmen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ int	ft_check_numbers(char **av, int ac)
 	{
 		while (av[j][i])
 		{
-			if (av[j][i] != '-' && av[j][i] != ' ' && !(av[j][i] >= '0' && av[j][i] <= '9'))
+			if (av[j][i] != '-' && av[j][i] != ' '
+				&& !(av[j][i] >= '0' && av[j][i] <= '9'))
 			{
 				ft_printf("Error\n");
 				return (0);

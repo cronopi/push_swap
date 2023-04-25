@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_stack.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nazurmen <nazurmen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:51:26 by rcastano          #+#    #+#             */
-/*   Updated: 2023/04/18 07:43:39 by rcastano         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:43:48 by nazurmen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	buble_sort(t_list *lk_tmp, int lst, t_list **l, t_list **lb)
 
 	i = 0;
 	j = 1 + j;
-	//ft_print_stack(&lk_tmp, &lk_tmp, 'a');
-	while (i < (lst / 4) * (j) && i < (lst - 1))
+	while (i < (lst / 8) * (j) && i < (lst - 1))
 	{
 		lk_tmp = lk_tmp->next;
 		i++;
@@ -34,7 +33,7 @@ void	buble_sort(t_list *lk_tmp, int lst, t_list **l, t_list **lb)
 		if (*(int *)lk_tmp->content <= key_nbr)
 		{
 			ft_rotate_direction(l, lb, i, 1);
-			lk_tmp =  *l;
+			lk_tmp = *l;
 			i = 0;
 		}
 		else
@@ -43,19 +42,6 @@ void	buble_sort(t_list *lk_tmp, int lst, t_list **l, t_list **lb)
 			i++;
 		}
 	}
-
-	/* while (lk_tmp != NULL)
-	{
-		if (*(int *)lk_tmp->content <= key_nbr)
-		{
-			while (lk_tmp != (*l))
-				ft_reverse_rotate_a(l, 1);
-			ft_push_b(l, lb, 1);
-			lk_tmp = (*l);
-		}
-		else
-			lk_tmp = lk_tmp->next;
-	} */
 }
 
 void	stack_a_size_10_100(t_list **l_num, t_list **lb_num, int lst_size_sa)
@@ -77,7 +63,6 @@ void	stack_a_size_10_100(t_list **l_num, t_list **lb_num, int lst_size_sa)
 	(void)tmp;
 	(void)lb_num;
 	(void)lst_size_sa;
-	//ft_print_stack(l_num, lb_num, 'q');
 	ft_lstclear(&lk_numbers, &free);
 }
 
@@ -86,13 +71,21 @@ void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers, int print)
 	int		lst_size_sa;
 
 	lst_size_sa = ft_lstsize(*l_numbers);
-	if (lst_size_sa > 10 && lst_size_sa <= 100)
+	if (lst_size_sa > 100)
+	{
+		stack_a_size_plus_100(l_numbers, lb_numbers, lst_size_sa);
+		while (ft_lstsize(*l_numbers) > 3)
+			ft_stack_size_plus3(l_numbers, lb_numbers, 1, print);
+		ft_sort_3(l_numbers, print);
+		while (ft_lstsize(*lb_numbers) > 0)
+			ft_stack_size_plus3_b(lb_numbers, l_numbers, 2, print);
+	}
+	else if (lst_size_sa > 10 && lst_size_sa <= 100)
 	{
 		stack_a_size_10_100(l_numbers, lb_numbers, lst_size_sa);
 		while (ft_lstsize(*l_numbers) > 3)
 			ft_stack_size_plus3(l_numbers, lb_numbers, 1, print);
-		//ft_print_stack(l_numbers, lb_numbers, 'q');
-		ft_sort_3(l_numbers, lb_numbers, print);
+		ft_sort_3(l_numbers, print);
 		while (ft_lstsize(*lb_numbers) > 0)
 			ft_stack_size_plus3_b(lb_numbers, l_numbers, 2, print);
 	}
@@ -100,7 +93,7 @@ void	ft_sort_stack(t_list **l_numbers, t_list **lb_numbers, int print)
 	{
 		while (ft_lstsize(*l_numbers) > 3)
 			ft_stack_size_plus3(l_numbers, lb_numbers, 1, print);
-		ft_sort_3(l_numbers, lb_numbers, print);
+		ft_sort_3(l_numbers, print);
 		while (ft_lstsize(*lb_numbers) != 0)
 			ft_push_a(l_numbers, lb_numbers, print);
 	}

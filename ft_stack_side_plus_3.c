@@ -12,7 +12,8 @@
 
 #include "ft_push_swap.h"
 
-void	ft_rotate_direction(t_list **l_numbers, t_list **lb_numbers, int i, int print)
+void	ft_rotate_direction(t_list **l_numbers, t_list **lb_numbers,
+	int i, int print)
 {
 	int		lst_size;
 
@@ -56,9 +57,9 @@ void	ft_stack_size_plus3(t_list **l_numbers, t_list **lb_numbers,
 	}
 	ft_rotate_direction(l_numbers, lb_numbers, i, print);
 }
-/*________________________________________________________________________________________________________*/
 
-void	ft_rotate_direction_b(t_list **l_numbers, t_list **lb_numbers, int i, int print)
+void	ft_rotate_direction_b(t_list **l_numbers, t_list **lb_numbers,
+	int i, int print)
 {
 	int		lst_size;
 

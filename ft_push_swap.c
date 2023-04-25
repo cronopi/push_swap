@@ -24,9 +24,9 @@ int	test( int i, int j, char **av)
 
 void	create_and_add_to_list(char **av, t_list **l_numbers, int i, int j)
 {
-	int		*nbr;
+	int			*nbr;
 	long int	check_nbr;
-	t_list	*new_numbers;
+	t_list		*new_numbers;
 
 	nbr = malloc(sizeof(int));
 	if (!nbr)
@@ -92,17 +92,12 @@ void	ft_push_swap(int ac, char **av)
 		return ;
 	}
 	ft_sort_stack(&l_numbers, &lb_numbers, 1);
-	//ft_print_stack(&l_numbers, &lb_numbers, 's');
 	ft_lstclear(&l_numbers, &free);
-	//free(l_numbers);
 	ft_lstclear(&lb_numbers, &free);
-	//free(lb_numbers);
-
 }
 
 int	main(int ac, char **av)
 {
 	ft_push_swap(ac, av);
-	//system("leaks a.out")
 	return (0);
 }
