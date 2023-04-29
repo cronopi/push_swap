@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roberto <roberto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:29:46 by rcastano          #+#    #+#             */
-/*   Updated: 2023/04/18 10:01:16 by rcastano         ###   ########.fr       */
+/*   Updated: 2023/04/29 18:27:27 by roberto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	create_and_add_to_list(char **av, t_list **l_numbers, int i, int j)
 	if (check_nbr > 2147483647 || check_nbr < -2147483648)
 	{
 		ft_printf("Error\n");
+		free(nbr);
 		ft_lstclear(l_numbers, &free);
 		exit(1);
 	}
@@ -86,10 +87,10 @@ void	ft_push_swap(int ac, char **av)
 	{
 		i = create_list(&l_numbers, av, i);
 	}
-	if (ft_check_for_duplicates(l_numbers) == 0)
+	if (ft_check_for_duplicates(l_numbers) == 0 || ft_check_sort_list(l_numbers) == 0)
 	{
 		ft_lstclear(&l_numbers, &free);
-		return ;
+		return;
 	}
 	ft_sort_stack(&l_numbers, &lb_numbers, 1);
 	ft_lstclear(&l_numbers, &free);

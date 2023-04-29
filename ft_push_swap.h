@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcastano <rcastano@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roberto <roberto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:29:57 by rcastano          #+#    #+#             */
-/*   Updated: 2023/04/18 09:13:36 by rcastano         ###   ########.fr       */
+/*   Updated: 2023/04/29 17:42:15 by roberto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_reverse_rotate_both(t_list **l_numbers, t_list **lb_numbers,
 void	ft_rotate_direction(t_list **l_numbers, t_list **lb_numbers,
 			int i, int print);
 void	ft_sort_3(t_list **l_numbers, int print);
+int		ft_check_sort_list(t_list *l_numbers);
 int		ft_check_for_duplicates(t_list *l_numbers);
 int		ft_check_numbers(char **av, int ac);
 void	swap_stack(t_list *a, t_list *b);
