@@ -6,7 +6,7 @@
 /*   By: roberto <roberto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:29:46 by rcastano          #+#    #+#             */
-/*   Updated: 2023/04/29 18:27:27 by roberto          ###   ########.fr       */
+/*   Updated: 2023/04/30 15:48:40 by roberto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,11 @@ void	ft_push_swap(int ac, char **av)
 	{
 		i = create_list(&l_numbers, av, i);
 	}
-	if (ft_check_for_duplicates(l_numbers) == 0 || ft_check_sort_list(l_numbers) == 0)
+	if (ft_check_for_duplicates(l_numbers) == 0
+		|| ft_check_sort_list(l_numbers) == 0)
 	{
 		ft_lstclear(&l_numbers, &free);
-		return;
+		return ;
 	}
 	ft_sort_stack(&l_numbers, &lb_numbers, 1);
 	ft_lstclear(&l_numbers, &free);
