@@ -6,7 +6,7 @@
 /*   By: roberto <roberto@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:29:46 by rcastano          #+#    #+#             */
-/*   Updated: 2023/04/30 15:48:40 by roberto          ###   ########.fr       */
+/*   Updated: 2023/05/11 19:18:31 by roberto          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,26 +47,23 @@ void	create_and_add_to_list(char **av, t_list **l_numbers, int i, int j)
 	ft_lstadd_back(l_numbers, new_numbers);
 }
 
-int	create_list(t_list **l_numbers, char **av, int i)
+int	create_list(t_list **l_numbers, char **av, int i, int *j)
 {
-	int	j;
-
-	j = 0;
-	j = test(i, j, av);
-	if (!av[i][j])
+	*j = test(i, *j, av);
+	if (!av[i][*j])
 	{
-		j = 0;
+		*j = 0;
 		i++;
 	}
-	create_and_add_to_list(av, l_numbers, i, j);
-	while (av[i][j] && av[i][j] != ' ')
+	create_and_add_to_list(av, l_numbers, i, *j);
+	while (av[i][*j] && av[i][*j] != ' ')
 	{
-		j++;
+		(*j)++;
 	}
-	j = test(i, j, av);
-	if (!av[i][j])
+	*j = test(i, *j, av);
+	if (!av[i][*j])
 	{
-		j = 0;
+		*j = 0;
 		i++;
 	}
 	return (i);
@@ -75,17 +72,19 @@ int	create_list(t_list **l_numbers, char **av, int i)
 void	ft_push_swap(int ac, char **av)
 {
 	int		i;
+	int		j;
 	t_list	*l_numbers;
 	t_list	*lb_numbers;
 
 	i = 1;
+	j = 0;
 	l_numbers = NULL;
 	lb_numbers = NULL;
 	if (ft_check_numbers(av, ac) == 0 || ac == 1)
 		return ;
 	while (i < ac)
 	{
-		i = create_list(&l_numbers, av, i);
+		i = create_list(&l_numbers, av, i, &j);
 	}
 	if (ft_check_for_duplicates(l_numbers) == 0
 		|| ft_check_sort_list(l_numbers) == 0)
